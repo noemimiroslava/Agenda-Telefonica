@@ -1,11 +1,20 @@
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 		Scanner sc = new Scanner(System.in);
-        Agenda agenda = new Agenda();
+
+        
+		ArrayList<Contacto> miLista = new ArrayList<>();
+        
+		int capacidad = 10; //Capacidad de la agenda de 10 contactos
+
+        // Creamos la Instanciación única
+        ConsultarAgenda consulta = new ConsultarAgenda(miLista, capacidad);
+        ModificarAgenda modifica = new ModificarAgenda(miLista);
 
         int opcion;
 
