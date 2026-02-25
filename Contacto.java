@@ -6,10 +6,10 @@ public class Contacto {
 
     // Constructor
     public Contacto(String nombre, String telefono) {
-        this.nombre = nombre;
+        this.nombre = nombre.trim();
         this.telefono = telefono;
     }
-
+    
     // Getters
     public String getNombre() {
         return nombre;

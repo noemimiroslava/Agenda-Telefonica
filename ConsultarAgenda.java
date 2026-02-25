@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class ConsultarAgenda {
 	
-	private ArrayList<Contacto> contactos;
+	private static ArrayList<Contacto> contactos;
 	private int capacidadMax;
 	
 	public ConsultarAgenda(ArrayList<Contacto> contactos, int capacidadMax) {
@@ -15,7 +15,7 @@ public class ConsultarAgenda {
 	}//metodo existeContacto
 	
 	
-	public void listarContactos() {
+	public static void listarContactos() {
 		if(contactos.isEmpty()) {
 			System.out.println("La lista esta vacía");
 		} else {
