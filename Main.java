@@ -25,13 +25,19 @@ public class Main {
             System.out.println("3. Buscar contacto");
             System.out.println("4. Eliminar contacto");
             System.out.println("5. Espacios libres");
-            System.out.println("6. Existe Contacto");
+            System.out.println("6. Existe contacto");
             System.out.println("7. Salir");
+            System.out.print("Seleccione una opción: ");
 
-            opcion = sc.nextInt();
-            sc.nextLine();
+            try {
+                opcion = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Debe ingresar un número válido.");
+                opcion = 0;
+            }
 
             switch (opcion) {
+
                 case 1:
                     System.out.print("Nombre: ");
                     String nombre = sc.nextLine();
@@ -93,6 +99,9 @@ public class Main {
                 case 7:
                     System.out.println("Saliendo...");
                     break;
+
+                default:
+                    System.out.println("Opción inválida.");
             }
 
         } while (opcion != 7);
@@ -105,4 +114,6 @@ public class Main {
 		consulta.listarContactos();
 	}
 
+        sc.close();
+    }
 }
