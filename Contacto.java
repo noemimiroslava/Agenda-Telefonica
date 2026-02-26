@@ -6,7 +6,7 @@ public class Contacto {
 
     // Constructor
     public Contacto(String nombre, String telefono) {
-        this.nombre = nombre.trim();
+        this.nombre = nombre.trim().toLowerCase();
         this.telefono = telefono;
         
         if (!telefono.matches("\\d{10}")) {
@@ -38,6 +38,6 @@ public class Contacto {
 
     @Override
     public int hashCode() {
-        return nombre.toLowerCase().hashCode();
+        return nombre.hashCode();
     }
 }
