@@ -8,47 +8,60 @@ public class ConsultarAgenda {
 	public ConsultarAgenda(ArrayList<Contacto> contactos, int capacidadMax) {
 		this.contactos = contactos;
 		this.capacidadMax = capacidadMax;
-	}//constructor ConsultarAgenda
+	}
 	
+	// 🔹 Verificar existencia (ignorando mayúsculas y espacios)
 	public boolean existeContactoPorNombre(String nombre) {
+		
+		String nombreNormalizado = nombre.trim().toLowerCase();
+		
 		for (Contacto c : contactos) {
-	        if (c.getNombre().equals(nombre)) {
+			
+	        String nombreGuardado = c.getNombre().trim().toLowerCase();
+	        
+	        if (nombreGuardado.equals(nombreNormalizado)) {
 	            return true;
-	        }//if
-	    }//or
+	        }
+	    }
 
 	    return false;
-	}//existecontacto
+	}//existeContacto
 	
 	
 	public void listarContactos() {
 		if(contactos.isEmpty()) {
-			System.out.println("La lista esta vacía");
+			System.out.println("La lista está vacía");
 		} else {
 			for(Contacto c: contactos) {
 				System.out.println(c);
-			}//for
-		}//if-else
-	}//metodo listarContactos
+			}
+		}
+	}//listarContactos
 	
 	
+	// 🔹 Buscar contacto con normalización correcta
 	public void buscaContacto(String nombre) {
 
+		String nombreNormalizado = nombre.trim().toLowerCase();
+
 	    for (Contacto c : contactos) {
-	        if (c.getNombre().equals(nombre)) {
+	    	
+	    	String nombreGuardado = c.getNombre().trim().toLowerCase();
+	    	
+	        if (nombreGuardado.equals(nombreNormalizado)) {
 	            System.out.println("Contacto encontrado:");
 	            System.out.println("Nombre: " + c.getNombre());
 	            System.out.println("Teléfono: " + c.getTelefono());
 	            return;
-	        }//if
-	    }//for
+	        }
+	    }
 
 	    System.out.println("Contacto no encontrado.");
-	}//metodo buscarContacto
+	}//buscaContacto
 	
 	
 	public int espacioLibres() {
 		return capacidadMax - contactos.size();
-	}//metodo espacioLibres
+	}//espaciosLibres
 
 }//ConsultarAgenda
