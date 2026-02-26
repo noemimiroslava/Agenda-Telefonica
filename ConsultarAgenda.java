@@ -12,7 +12,7 @@ public class ConsultarAgenda {
 	
 	public boolean existeContactoPorNombre(String nombre) {
 		for (Contacto c : contactos) {
-	        if (c.getNombre().equals(nombre)) {
+	        if (c.getNombre().equals(nombre.trim().toLowerCase()))) {
 	            return true;
 	        }//if
 	    }//or
