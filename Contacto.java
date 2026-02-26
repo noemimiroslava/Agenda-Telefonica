@@ -1,4 +1,3 @@
-
 public class Contacto {
 
 	private String nombre;
@@ -6,10 +5,14 @@ public class Contacto {
 
     // Constructor
     public Contacto(String nombre, String telefono) {
-        this.nombre = nombre;
+        this.nombre = nombre.trim().toLowerCase();
         this.telefono = telefono;
+        
+        if (!telefono.matches("\\d{10}")) {
+            throw new IllegalArgumentException("El teléfono debe contener exactamente 10 dígitos numéricos.");
+        }//validación cantidad de números
     }
-
+    
     // Getters
     public String getNombre() {
         return nombre;
@@ -21,5 +24,19 @@ public class Contacto {
 
     public String toString() {
         return "Nombre: " + nombre + " | Teléfono: " + telefono;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Contacto other = (Contacto) obj;
+        return nombre.equals(other.nombre);
+    }
+
+    @Override
+    public int hashCode() {
+        return nombre.hashCode();
     }
 }
