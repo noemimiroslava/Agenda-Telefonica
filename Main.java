@@ -35,17 +35,25 @@ public class Main {
                 case 1:
                     System.out.print("Nombre: ");
                     String nombre = sc.nextLine();
+                    
+                                        
+                    if (consulta.existeContactoPorNombre(nombre)) {
+                        System.out.println("El contacto existe en la agenda.");
+                        consulta.buscaContacto(nombre);
+                        
+                    } else {
+                    	System.out.print("Teléfono (10 dígitos): ");
+                        String telefono = sc.nextLine();
 
-                    System.out.print("Teléfono (10 dígitos): ");
-                    String telefono = sc.nextLine();
-
-                    try {
-                        Contacto nuevo = new Contacto(nombre, telefono);
-                        modifica.añadirContacto(nuevo);
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Error: " + e.getMessage());
-                        System.out.println("Contacto no agregado");
+                        try {
+                            Contacto nuevo = new Contacto(nombre, telefono);
+                            modifica.añadirContacto(nuevo);
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Error: " + e.getMessage());
+                            System.out.println("Contacto no agregado");
+                        }
                     }
+                                  
                     break;
 
                 case 2:
@@ -72,10 +80,10 @@ public class Main {
                 	 System.out.print("Nombre del contacto a verificar: ");
                      String nombreExiste = sc.nextLine();
 
-                     Contacto existe = new Contacto(nombreExiste, "0000000000");
-                     
+                                         
                      if (consulta.existeContactoPorNombre(nombreExiste)) {
                          System.out.println("El contacto existe en la agenda.");
+                         consulta.buscaContacto(nombreExiste);
                      } else {
                          System.out.println("El contacto NO existe en la agenda.");
                      }
@@ -88,7 +96,7 @@ public class Main {
 
         } while (opcion != 7);
 		
-		
+		sc.close();
 		
 	}
 
