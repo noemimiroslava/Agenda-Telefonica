@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class ConsultarAgenda {
 	
-	private static ArrayList<Contacto> contactos;
+	private ArrayList<Contacto> contactos;
 	private int capacidadMax;
 	
 	public ConsultarAgenda(ArrayList<Contacto> contactos, int capacidadMax) {
@@ -10,29 +10,41 @@ public class ConsultarAgenda {
 		this.capacidadMax = capacidadMax;
 	}//constructor ConsultarAgenda
 	
-	public boolean existeContacto(Contacto c) {
-		return contactos.contains(c);
-	}//metodo existeContacto
+	public boolean existeContactoPorNombre(String nombre) {
+		for (Contacto c : contactos) {
+	        if (c.getNombre().equals(nombre)) {
+	            return true;
+	        }//if
+	    }//or
+
+	    return false;
+	}//existecontacto
 	
 	
-	public static void listarContactos() {
+	public void listarContactos() {
 		if(contactos.isEmpty()) {
 			System.out.println("La lista esta vacía");
 		} else {
-			for(Contacto c: contactos) System.out.println(c);
+			for(Contacto c: contactos) {
+				System.out.println(c);
+			}//for
 		}//if-else
 	}//metodo listarContactos
 	
 	
-	public void buscaContacto (String nombre) {
-		for(Contacto c : contactos) {
-			if( c.getNombre().equalsIgnoreCase(nombre) ) {
-				System.out.println("Encontrado...su número de teléfono es: " + c.getTelefono());
-			}else {
-				System.out.println("No se encontro contacto");
-			}//if-else
-		}//for
-	}//metodo buscaContacto
+	public void buscaContacto(String nombre) {
+
+	    for (Contacto c : contactos) {
+	        if (c.getNombre().equals(nombre)) {
+	            System.out.println("Contacto encontrado:");
+	            System.out.println("Nombre: " + c.getNombre());
+	            System.out.println("Teléfono: " + c.getTelefono());
+	            return;
+	        }//if
+	    }//for
+
+	    System.out.println("Contacto no encontrado.");
+	}//metodo buscarContacto
 	
 	
 	public int espacioLibres() {

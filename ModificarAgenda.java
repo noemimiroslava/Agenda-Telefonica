@@ -6,7 +6,6 @@ public class ModificarAgenda {
 	private int capacidadMax;
 	
 	public ModificarAgenda(ArrayList<Contacto> contactos, int capacidadMax) {
-		super();
 		this.contactos = contactos;
 		this.capacidadMax = capacidadMax;
 	}//constructor
@@ -16,31 +15,27 @@ public class ModificarAgenda {
         if (agendaLlena()) {
             System.out.println("La agenda está llena. No se pueden añadir más contactos.");
             return;
-        }//añadirContacto
+        }//if
 
         
-        for (Contacto contacto : contactos) {
-            if (contacto.getNombre().equalsIgnoreCase(c.getNombre())) {
-                System.out.println("El contacto ya existe. No se pueden duplicar nombres.");
-                return;
-            }//validación contacto no existe
-        }
+        if (contactos.contains(c)) {
+            System.out.println("El contacto ya existe.");
+            return;
+        }//if
 
         contactos.add(c);
         System.out.println("Contacto añadido correctamente.");
-    }//añadir contacto
+    }//añadirContacto
+         
 
-    public void eliminarContacto(Contacto c) {
+    public void eliminarContactoPorNombre(String nombre) {
+        Contacto temp = new Contacto(nombre, "0000000000");
 
-        for (Contacto contacto : contactos) {
-            if (contacto.getNombre().equalsIgnoreCase(c.getNombre())) {
-                contactos.remove(contacto);
-                System.out.println("Contacto eliminado correctamente.");
-                return;
-            }//if
-        }//for
-
-        System.out.println("El contacto no existe en la agenda.");
+        if (contactos.remove(temp)) {
+            System.out.println("Contacto eliminado correctamente.");
+        } else {
+            System.out.println("El contacto no existe en la agenda.");
+        }
     }//eliminarContacto
 
     public boolean agendaLlena() {
