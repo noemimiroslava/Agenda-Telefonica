@@ -36,11 +36,16 @@ public class Main {
                     System.out.print("Nombre: ");
                     String nombre = sc.nextLine();
 
-                    System.out.print("Teléfono: ");
+                    System.out.print("Teléfono (10 dígitos): ");
                     String telefono = sc.nextLine();
 
-                    Contacto nuevo = new Contacto(nombre, telefono);
-                    modifica.añadirContacto(nuevo);
+                    try {
+                        Contacto nuevo = new Contacto(nombre, telefono);
+                        modifica.añadirContacto(nuevo);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Error: " + e.getMessage());
+                        System.out.println("Contacto no agregado");
+                    }
                     break;
 
                 case 2:
@@ -54,11 +59,9 @@ public class Main {
                     break;
 
                 case 4:
-                    System.out.print("Eliminar contacto: ");
+                	System.out.print("Nombre a eliminar: ");
                     String nombreEliminar = sc.nextLine();
-
-                    Contacto eliminar = new Contacto(nombreEliminar, "");
-                    modifica.eliminarContacto(eliminar);
+                    modifica.eliminarContactoPorNombre(nombreEliminar);
                     break;
 
                 case 5:
@@ -69,14 +72,15 @@ public class Main {
                 	 System.out.print("Nombre del contacto a verificar: ");
                      String nombreExiste = sc.nextLine();
 
-                     Contacto existe = new Contacto(nombreExiste, "");
+                     Contacto existe = new Contacto(nombreExiste, "0000000000");
                      
-                     if (consulta.existeContacto(existe)) {
+                     if (consulta.existeContactoPorNombre(nombreExiste)) {
                          System.out.println("El contacto existe en la agenda.");
                      } else {
                          System.out.println("El contacto NO existe en la agenda.");
                      }
                      break;
+                     
                 case 7:
                     System.out.println("Saliendo...");
                     break;
