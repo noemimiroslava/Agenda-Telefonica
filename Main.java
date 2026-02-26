@@ -1,11 +1,20 @@
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 		Scanner sc = new Scanner(System.in);
-        Agenda agenda = new Agenda();
+
+        
+		ArrayList<Contacto> miLista = new ArrayList<>();
+        
+		int capacidad = 10; //Capacidad de la agenda de 10 contactos
+
+        // Creamos la Instanciación única
+        ConsultarAgenda consulta = new ConsultarAgenda(miLista, capacidad);
+        ModificarAgenda modifica = new ModificarAgenda(miLista, capacidad);
 
         int opcion;
 
@@ -26,48 +35,61 @@ public class Main {
                 case 1:
                     System.out.print("Nombre: ");
                     String nombre = sc.nextLine();
+                    
+                                        
+                    if (consulta.existeContactoPorNombre(nombre)) {
+                        System.out.println("El contacto existe en la agenda.");
+                        consulta.buscaContacto(nombre);
+                        
+                    } else {
+                    	System.out.print("Teléfono (10 dígitos): ");
+                        String telefono = sc.nextLine();
 
-                    System.out.print("Teléfono: ");
-                    String telefono = sc.nextLine();
-
-                    ModificarAgenda.añadirContacto();
+                        try {
+                            Contacto nuevo = new Contacto(nombre, telefono);
+                            modifica.añadirContacto(nuevo);
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Error: " + e.getMessage());
+                            System.out.println("Contacto no agregado");
+                        }
+                    }
+                                  
                     break;
 
                 case 2:
-                    ConsultarAgenda.listarContactos();
-                    break;
+                	 extracted(consulta);
+                     break;
 
                 case 3:
-                    System.out.print("Nombre a buscar: ");
-                    String buscar = sc.nextLine();
-                    Contacto encontrado = ConsultarAgenda.buscaContacto(buscar);
-
-                    if (encontrado != null)
-                        System.out.println(encontrado);
-                    else
-                        System.out.println("No encontrado.");
+                	System.out.print("Nombre a buscar: ");
+                    String nombreBuscar = sc.nextLine();
+                    consulta.buscaContacto(nombreBuscar);
                     break;
 
                 case 4:
-                    System.out.print("Nombre a eliminar: ");
-                    String eliminar = sc.nextLine();
-                    
-                    ModificarAgenda.eliminarContacto(eliminar);
+                	System.out.print("Nombre a eliminar: ");
+                    String nombreEliminar = sc.nextLine();
+                    modifica.eliminarContactoPorNombre(nombreEliminar);
                     break;
 
                 case 5:
-                    System.out.println("Espacios libres: ");
-                    ModificarAgenda.espacioLibres();
-                    if (ModificarAgenda.espacioLibres() == 0) {
-                    	ModificarAgenda.agendaLlena();
-                    }
-                    break;
+                	 System.out.println("Espacios disponibles: " + modifica.espaciosLibres());
+                     break;
 
                 case 6:
-                    System.out.println("¿Existe contacto?");
-                    ConsultarAgenda.existeContacto();
-                    break;
-                    
+                	 System.out.print("Nombre del contacto a verificar: ");
+                     String nombreExiste = sc.nextLine();
+
+                     Contacto existe = new Contacto(nombreExiste, "0000000000");
+                     
+                     if (consulta.existeContactoPorNombre(nombreExiste)) {
+                         System.out.println("El contacto existe en la agenda.");
+                         consulta.buscaContacto(nombreExiste);
+                     } else {
+                         System.out.println("El contacto NO existe en la agenda.");
+                     }
+                     break;
+                     
                 case 7:
                     System.out.println("Saliendo...");
                     break;
@@ -75,8 +97,12 @@ public class Main {
 
         } while (opcion != 7);
 		
+		sc.close();
 		
-		
+	}
+
+	private static void extracted(ConsultarAgenda consulta) {
+		consulta.listarContactos();
 	}
 
 }
