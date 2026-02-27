@@ -45,7 +45,7 @@ public class Main {
                                         
                     if (consulta.existeContactoPorNombre(nombre)) {
                         System.out.println("El contacto existe en la agenda.");
-                        consulta.buscaContacto(nombre);
+                        consulta.buscaContacto(nombre.trim().toLowerCase());
                         
                     } else {
                     	System.out.print("Teléfono (10 dígitos): ");
@@ -69,7 +69,7 @@ public class Main {
                 case 3:
                 	System.out.print("Nombre a buscar: ");
                     String nombreBuscar = sc.nextLine();
-                    consulta.buscaContacto(nombreBuscar);
+                    consulta.buscaContacto(nombreBuscar.trim().toLowerCase());
                     break;
 
                 case 4:
@@ -88,9 +88,9 @@ public class Main {
 
                      Contacto existe = new Contacto(nombreExiste, "0000000000");
                      
-                     if (consulta.existeContactoPorNombre(nombreExiste)) {
+                     if (consulta.existeContactoPorNombre(nombreExiste.trim().toLowerCase())) {
                          System.out.println("El contacto existe en la agenda.");
-                         consulta.buscaContacto(nombreExiste);
+                         consulta.buscaContacto(nombreExiste.trim().toLowerCase());
                      } else {
                          System.out.println("El contacto NO existe en la agenda.");
                      }
@@ -114,6 +114,5 @@ public class Main {
 		consulta.listarContactos();
 	}
 
-        sc.close();
     }
-}
+
